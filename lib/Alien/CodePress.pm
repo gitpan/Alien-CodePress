@@ -20,7 +20,7 @@ use vars qw($VERSION);
 
 use Alien::CodePress::Archive;
 
-$VERSION = 1.01;
+$VERSION = 1.02;
 
 my @PROPERTIES = qw(
     path

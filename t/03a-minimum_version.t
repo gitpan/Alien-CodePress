@@ -13,7 +13,7 @@ if ( not $ENV{ALIEN_CODEPRESS_AUTHOR} ) {
     plan( skip_all => $msg );
 }
 
-eval { use Test::MinimumVersion; };
+eval 'use Test::MinimumVersion'; ## no critic
 
 if ( $EVAL_ERROR ) {
     my $msg = 'Test::MinimumVersion required';

@@ -7,8 +7,8 @@ if ($ENV{TEST_COVERAGE}) {
     plan( skip_all => 'Disabled when testing coverage.' );
 }
 
-if ( not $ENV{CLASS_DOT_AUTHOR} ) {
-    my $msg = 'Author test.  Set $ENV{CLASS_DOT_AUTHOR} to a true value to run.';
+if ( not $ENV{ALIEN_CODEPRESS_AUTHOR} ) {
+    my $msg = 'Author test.  Set $ENV{ALIEN_CODEPRESS_AUTHOR} to a true value to run.';
     plan( skip_all => $msg );
 }
 

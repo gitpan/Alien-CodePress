@@ -13,7 +13,7 @@ use 5.00600;
 use Carp;
 use vars qw($VERSION);
 
-$VERSION            = 1.01;
+$VERSION            = 1.02;
 
 my $CODEPRESS_VERSION  = '0.9.6';
 
