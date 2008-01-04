@@ -1,6 +1,6 @@
 ---
 name: Alien-CodePress
-version: 1.02
+version: 1.03
 author:
   - 'Ask Solem <asksh@cpan.org>'
 abstract: Installing and finding CodePress.
@@ -17,11 +17,11 @@ dynamic_config: 1
 provides:
   Alien::CodePress:
     file: lib/Alien/CodePress.pm
-    version: 1.02
+    version: 1.03
   Alien::CodePress::Archive:
     file: lib/Alien/CodePress/Archive.pm
-    version: 1.02
-generated_by: Module::Build version 0.2808
+    version: 1.03
+generated_by: Module::Build version 0.280801
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
   version: 1.2

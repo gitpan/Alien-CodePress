@@ -67,8 +67,9 @@ CONFIGURATION AND ENVIRONMENT
     This module requires no configuration file or environment variables.
 
 DEPENDENCIES
-    * [Archive::Extract]
-    * [Module::Build]
+    *   [Archive::Extract]
+
+    *   [Module::Build]
 
 INCOMPATIBILITIES
     None known.
@@ -81,10 +82,12 @@ BUGS AND LIMITATIONS
     <http://rt.cpan.org>.
 
 SEE ALSO
-    * <http://www.codepress.org>
+    *   <http://www.codepress.org>
+
         The official CodePress home page.
 
-    * Alien
+    *   Alien
+
         The manifesto of the Alien namespace.
 
 AUTHOR

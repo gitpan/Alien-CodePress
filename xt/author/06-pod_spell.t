@@ -5,14 +5,9 @@ use FindBin qw($Bin);
 use File::Spec;
 use File::Basename qw(basename);
 use FileHandle;
+use File::Find;
 use English qw( -no_match_vars );
-use 5.006000;
-
-my @POD_FILES = (
-    [ qw(lib Alien CodePress.pm) ],
-    [ qw(lib Alien CodePress Archive.pm) ],
-    [ qw(bin codepress-install) ],
-);
+use 5.006_001;
 
 my @REQUIRED_MODULES_FOR_THIS_TEST = qw(
     File::Which
@@ -22,20 +17,16 @@ my @REQUIRED_MODULES_FOR_THIS_TEST = qw(
 # List of spelling programs ordered by the
 # ones we want most.
 my @SPELL_PROGRAMS = qw(
-   spell
-   aspell
+    aspell
+    spell
 );
 
 my @STOPWORD_FILES = qw(
     stopwords-asksh.txt
 );
 
-if ($ENV{TEST_COVERAGE}) {
-    plan( skip_all => 'Disabled when testing coverage.' );
-}
-
-if ( not $ENV{ALIEN_CODEPRESS_AUTHOR} ) {
-    my $msg = 'Author test.  Set $ENV{ALIEN_CODEPRESS_AUTHOR} to a true value to run.';
+if ( not $ENV{GETOPTLL_AUTHOR} ) {
+    my $msg = 'Author test.  Set $ENV{GETOPTLL_AUTHOR} to a true value to run.';
     plan( skip_all => $msg );
 }
 
@@ -99,12 +90,23 @@ if ($spell_type eq 'aspell') {
                             
 set_spell_cmd($path_to_spell);
 
-plan( tests => scalar @POD_FILES );
+my $UPDIR  = File::Spec->updir;
+my $libdir = File::Spec->catfile($Bin, $UPDIR, $UPDIR, 'lib');
 
-for my $POD_entry (@POD_FILES) {
-    my $POD_file      = File::Spec->catdir(@{ $POD_entry });
-    my $prev_dir      = File::Spec->updir();
-    my $POD_file_path = File::Spec->catdir($Bin, $prev_dir, $POD_file);
-    pod_file_spelling_ok($POD_file_path, "Spelling for $POD_file");
+my @pm_files;
+my $spelltest_pm_files = sub {
+    my $source_file = $File::Find::name; ## no critic
+    return if not -f $source_file;
+    return if not -T $source_file;
+    return if not $source_file =~ m{\. (?: pm | pod | pl ) $}xms;
+    
+    push @pm_files, $source_file; 
+};
+
+find( $spelltest_pm_files, $libdir );
+
+plan( tests => scalar @pm_files );
+
+for my $pm_file (@pm_files) {
+    pod_file_spelling_ok($pm_file);
 }
-
